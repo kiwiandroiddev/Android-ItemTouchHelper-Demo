@@ -50,6 +50,10 @@ public class MainActivity extends ActionBarActivity implements MainFragment.OnLi
                 break;
 
             case 1:
+                fragment = new RecyclerCardListFragment();
+                break;
+
+            case 2:
                 fragment = new RecyclerGridFragment();
                 break;
         }
