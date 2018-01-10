@@ -18,6 +18,7 @@
 
     <array name="main_items">
         <item>List - Basic Drag and Swipe</item>
+        <item>List - Drag and Swipe Cards</item>
         <item>Grid - Basic Swipe</item>
     </array>
 

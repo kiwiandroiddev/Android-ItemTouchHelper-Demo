@@ -17,4 +17,10 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Recommended card elevation values from
+            https://material.io/guidelines/material-design/elevation-shadows.html#elevation-shadows-elevation-android
+    -->
+    <dimen name="card_elevation_default">2dp</dimen>
+    <dimen name="card_elevation_hover">8dp</dimen>
 </resources>
