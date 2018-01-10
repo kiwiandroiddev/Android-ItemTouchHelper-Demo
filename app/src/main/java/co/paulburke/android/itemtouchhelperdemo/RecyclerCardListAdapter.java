@@ -16,8 +16,10 @@
 
 package co.paulburke.android.itemtouchhelperdemo;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -102,25 +104,37 @@ public class RecyclerCardListAdapter extends RecyclerView.Adapter<RecyclerCardLi
     public static class ItemViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder {
 
+        public final CardView cardView;
         public final TextView textView;
         public final ImageView handleView;
 
+        private final float cardElevationRestingPx;
+        private final float cardElevationFloatingPx;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
+            cardView = (CardView) itemView.findViewById(R.id.item);
             textView = (TextView) itemView.findViewById(R.id.text);
             handleView = (ImageView) itemView.findViewById(R.id.handle);
+
+            cardElevationRestingPx = itemView.getResources().getDimension(R.dimen.card_elevation_resting);
+            cardElevationFloatingPx = itemView.getResources().getDimension(R.dimen.card_elevation_floating);
         }
 
         @Override
         public void onItemSelected() {
-            float elevationPx = itemView.getResources().getDimension(R.dimen.card_elevation_hover);
-            ((CardView)itemView.findViewById(R.id.item)).setCardElevation(elevationPx);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(cardView, "cardElevation", cardElevationRestingPx, cardElevationFloatingPx);
+            animator.setInterpolator(new FastOutSlowInInterpolator());
+            animator.setDuration(250L);
+            animator.start();
         }
 
         @Override
         public void onItemClear() {
-            float elevationPx = itemView.getResources().getDimension(R.dimen.card_elevation_default);
-            ((CardView)itemView.findViewById(R.id.item)).setCardElevation(elevationPx);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(cardView, "cardElevation", cardElevationFloatingPx, cardElevationRestingPx);
+            animator.setInterpolator(new FastOutSlowInInterpolator());
+            animator.setDuration(250L);
+            animator.start();
         }
     }
 }
